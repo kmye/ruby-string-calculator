@@ -2,7 +2,11 @@
 
 class StringCalculator
   def add(input)
-    num1, num2 = input.split(',')
-    num1.to_i + num2.to_i
+    numbers = input.split(',')
+    result = 0
+    numbers.each do |number|
+      result += number.to_i
+    end
+    result
   end
 end
