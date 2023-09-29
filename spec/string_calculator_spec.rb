@@ -25,5 +25,9 @@ RSpec.describe StringCalculator do
     it 'returns sum of numbers separated by new lines' do
       expect(subject.add("1\n2\n")).to eq(3)
     end
+
+    it 'returns error when input is not a number' do
+      expect{ subject.add("a") }.to raise_error
+    end
   end
 end
