@@ -29,5 +29,9 @@ RSpec.describe StringCalculator do
     it 'returns error when input is not a number' do
       expect{ subject.add("a") }.to raise_error('Input must be a number')
     end
+
+    it 'handles custom delimiter' do
+      expect(subject.add("//;\n1;2")).to eq(3)
+    end
   end
 end
