@@ -4,7 +4,6 @@ class StringCalculator
   def add(input)
     return 0 if input.empty?
 
-    numbers = input.split(/,|\n/).map(&:to_i)
-    numbers.sum
+    input.split(/,|\n/).map(&:to_i).sum
   end
 end
