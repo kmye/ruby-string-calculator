@@ -27,7 +27,7 @@ RSpec.describe StringCalculator do
     end
 
     it 'returns error when input is not a number' do
-      expect{ subject.add("a") }.to raise_error
+      expect{ subject.add("a") }.to raise_error('Input must be a number')
     end
   end
 end
