@@ -2,11 +2,9 @@
 
 class StringCalculator
   def add(input)
-    numbers = input.split(/,|\n/)
-    result = 0
-    numbers.each do |number|
-      result += number.to_i
-    end
-    result
+    return 0 if input.empty?
+
+    numbers = input.split(/,|\n/).map(&:to_i)
+    numbers.sum
   end
 end
