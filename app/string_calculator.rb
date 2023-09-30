@@ -3,8 +3,22 @@
 class StringCalculator
   def add(input)
     return 0 if input.empty?
+    custom_delimiter = input.match(/^\/\/(.)\n/)
+    formatted_input = if custom_delimiter.nil?
+                        input
+                      else
+                        input.gsub(/^\/\/.\n/, '')
+                      end
 
-    numbers = input.split(/,|\n/)
+    regex = if custom_delimiter.nil?
+              /,|\n|/
+            else
+              custom_delimiter[1]
+            end
+
+
+    numbers = formatted_input.split(regex)
+
     result = 0
     numbers.each do |number|
       raise 'Input must be a number' unless number.match?(/^\d+$/)
