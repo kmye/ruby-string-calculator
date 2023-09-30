@@ -32,6 +32,7 @@ class StringCalculator
 
   def validate(numbers)
     numbers.each do |number|
+      raise 'Negative numbers are not allowed' if number.to_i.negative?
       raise 'Input must be a number' unless number.match?(/^\d+$/)
     end
   end
