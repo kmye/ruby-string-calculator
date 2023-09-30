@@ -3,6 +3,7 @@
 class StringCalculator
   def add(input)
     return 0 if input.empty?
+
     delimiter = extract_delimiter(input)
     formatted_input = format_input(input)
     numbers = formatted_input.split(/#{delimiter}/)
@@ -11,12 +12,12 @@ class StringCalculator
   end
 
   def has_custom_delimiter?(input)
-    input.start_with?("//")
+    input.start_with?('//')
   end
 
   def extract_delimiter(input)
     if has_custom_delimiter?(input)
-      "[#{input.match(/^\/\/(.)\n/)[1]}]"
+      "[#{input.match(%r{^//(.)\n})[1]}]"
     else
       '[,\n]'
     end
@@ -24,7 +25,7 @@ class StringCalculator
 
   def format_input(input)
     if has_custom_delimiter?(input)
-      input.gsub(/^\/\/.\n/, '')
+      input.gsub(%r{^//.\n}, '')
     else
       input
     end
