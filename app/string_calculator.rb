@@ -6,7 +6,7 @@ class StringCalculator
 
     delimiter = extract_delimiter(input)
     formatted_input = format_input(input)
-    numbers = formatted_input.split(/#{delimiter}/)
+    numbers = formatted_input.split(/#{delimiter}+/)
     validate(numbers)
     numbers.map(&:to_i).select { |number| number <= 1000 }.sum
   end
@@ -17,7 +17,7 @@ class StringCalculator
 
   def extract_delimiter(input)
     if has_custom_delimiter?(input)
-      "[#{input.match(%r{^//(.)\n})[1]}]"
+      input.match(%r{^//(\[?.+\]?)+\n})[1]
     else
       '[,\n]'
     end
@@ -25,7 +25,7 @@ class StringCalculator
 
   def format_input(input)
     if has_custom_delimiter?(input)
-      input.gsub(%r{^//.\n}, '')
+      input.gsub(%r{^//(\[?.+\]?)+\n}, '')
     else
       input
     end
