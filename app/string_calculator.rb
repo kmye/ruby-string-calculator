@@ -7,7 +7,7 @@ class StringCalculator
     formatted_input = format_input(input)
     numbers = formatted_input.split(/#{delimiter}/)
     validate(numbers)
-    numbers.map(&:to_i).sum
+    numbers.map(&:to_i).select { |number| number <= 1000 }.sum
   end
 
   def has_custom_delimiter?(input)
