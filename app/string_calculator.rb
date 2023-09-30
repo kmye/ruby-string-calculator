@@ -11,12 +11,12 @@ class StringCalculator
     numbers.map(&:to_i).select { |number| number <= 1000 }.sum
   end
 
-  def has_custom_delimiter?(input)
+  def custom_delimiter?(input)
     input.start_with?('//')
   end
 
   def extract_delimiter(input)
-    if has_custom_delimiter?(input)
+    if custom_delimiter?(input)
       input.match(%r{^//(\[?.+\]?)+\n})[1]
     else
       '[,\n]'
@@ -24,7 +24,7 @@ class StringCalculator
   end
 
   def format_input(input)
-    if has_custom_delimiter?(input)
+    if custom_delimiter?(input)
       input.gsub(%r{^//(\[?.+\]?)+\n}, '')
     else
       input
