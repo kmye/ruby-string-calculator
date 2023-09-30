@@ -3,29 +3,36 @@
 class StringCalculator
   def add(input)
     return 0 if input.empty?
-    custom_delimiter = input.match(/^\/\/(.)\n/)
-    formatted_input = if custom_delimiter.nil?
-                        input
-                      else
-                        input.gsub(/^\/\/.\n/, '')
-                      end
+    delimiter = extract_delimiter(input)
+    formatted_input = format_input(input)
+    numbers = formatted_input.split(/#{delimiter}/)
+    validate(numbers)
+    numbers.map(&:to_i).sum
+  end
 
-    regex = if custom_delimiter.nil?
-              /,|\n|/
-            else
-              custom_delimiter[1]
-            end
+  def has_custom_delimiter?(input)
+    input.start_with?("//")
+  end
 
+  def extract_delimiter(input)
+    if has_custom_delimiter?(input)
+      "[#{input.match(/^\/\/(.)\n/)[1]}]"
+    else
+      '[,\n]'
+    end
+  end
 
-    numbers = formatted_input.split(regex)
+  def format_input(input)
+    if has_custom_delimiter?(input)
+      input.gsub(/^\/\/.\n/, '')
+    else
+      input
+    end
+  end
 
-    result = 0
+  def validate(numbers)
     numbers.each do |number|
       raise 'Input must be a number' unless number.match?(/^\d+$/)
-
-      result += number.to_i
     end
-
-    result
   end
 end
