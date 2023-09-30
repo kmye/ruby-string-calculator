@@ -19,7 +19,7 @@ class StringCalculator
 
   def extract_delimiter(input)
     if custom_delimiter?(input)
-      input.match(DELIMITER_REGEX)[1]
+      input.match(DELIMITER_REGEX)[1].gsub('][', ']|[')
     else
       '[,\n]'
     end
