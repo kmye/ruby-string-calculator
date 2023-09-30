@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class StringCalculator
+  DELIMITER_REGEX = %r{^//(\[?.+\]?)+\n}.freeze
+
   def add(input)
     return 0 if input.empty?
 
@@ -17,7 +19,7 @@ class StringCalculator
 
   def extract_delimiter(input)
     if custom_delimiter?(input)
-      input.match(%r{^//(\[?.+\]?)+\n})[1]
+      input.match(DELIMITER_REGEX)[1]
     else
       '[,\n]'
     end
@@ -25,7 +27,7 @@ class StringCalculator
 
   def format_input(input)
     if custom_delimiter?(input)
-      input.gsub(%r{^//(\[?.+\]?)+\n}, '')
+      input.gsub(DELIMITER_REGEX, '')
     else
       input
     end
